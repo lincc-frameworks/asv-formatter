@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier
+_commit: v1.4.1
+_src_path: gh:lincc-frameworks/python-project-template
+author_email: Lincc-frameworks-team@lists.lsst.org
+author_name: LINCC Frameworks Team
+create_example_module: false
+custom_install: true
+include_docs: true
+include_notebooks: true
+mypy_type_checking: none
+package_name: lf_asv_formatter
+preferred_linter: black
+project_license: MIT
+project_name: lf-asv-formatter
+use_gitlfs: none
+use_isort: true
