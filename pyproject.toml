@@ -24,7 +24,7 @@ dev = [
     "pytest",
     "pytest-cov", # Used to report total code coverage
     "pre-commit", # Used to run checks before finalizing a git commit
-    "black", # Used for static linting of files
+    "pylint", # Used for static linting of files
 ]
 
 [build-system]
@@ -41,9 +41,3 @@ write_to = "src/lf_asv_formatter/_version.py"
 testpaths = [
     "tests",
 ]
-
-[tool.black]
-line-length = 110
-
-[tool.isort]
-profile = "black"
