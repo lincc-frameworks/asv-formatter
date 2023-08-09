@@ -5,8 +5,8 @@ author_email: Lincc-frameworks-team@lists.lsst.org
 author_name: LINCC Frameworks Team
 create_example_module: false
 custom_install: true
-include_docs: true
-include_notebooks: true
+include_docs: false
+include_notebooks: false
 mypy_type_checking: none
 package_name: lf_asv_formatter
 preferred_linter: black
