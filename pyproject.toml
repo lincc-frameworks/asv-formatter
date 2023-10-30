@@ -41,3 +41,9 @@ write_to = "src/lf_asv_formatter/_version.py"
 testpaths = [
     "tests",
 ]
+
+[tool.coverage.report]
+omit = [
+    "src/lf_asv_formatter/_version.py",
+    "src/lf_asv_formatter/__main__.py",
+]

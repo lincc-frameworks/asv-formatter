@@ -25,26 +25,6 @@ def test_data_tabulate_dir(test_data_dir):
 
 
 @pytest.fixture
-def original_output_simple_path(test_data_simple_dir):
-    return os.path.join(test_data_simple_dir, "original_output")
-
-
-@pytest.fixture
-def expected_output_simple_path(test_data_simple_dir):
-    return os.path.join(test_data_simple_dir, "expected_output")
-
-
-@pytest.fixture
-def original_output_tabulate_path(test_data_tabulate_dir):
-    return os.path.join(test_data_tabulate_dir, "original_output")
-
-
-@pytest.fixture
-def expected_output_tabulate_path(test_data_tabulate_dir):
-    return os.path.join(test_data_tabulate_dir, "expected_output")
-
-
-@pytest.fixture
 def assert_text_file_matches():
     def assert_text_file_matches(file_name, golden_file_name):
         """Convenience method to read a text file and compare the contents, line for line.

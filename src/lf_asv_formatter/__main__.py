@@ -6,6 +6,7 @@ from .tabulate_formatter import TabulateFormatter
 
 
 def parse_asv_version():
+    """Parses asv version from command line arguments."""
     parser = argparse.ArgumentParser("lf_asv_formatter")
     parser.add_argument("--asv_version", help="Version of asv", type=str, required=True)
     return parser.parse_args().asv_version
