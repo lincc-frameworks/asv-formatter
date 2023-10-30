@@ -1,7 +1,7 @@
 from .asv_formatter import AsvFormatter
 
-
 # pylint: disable=line-too-long
+
 
 class SimpleFormatter(AsvFormatter):
     """The SimpleFormatter is used for asv >= 0.6.0.

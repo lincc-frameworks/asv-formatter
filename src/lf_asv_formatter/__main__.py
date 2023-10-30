@@ -1,11 +1,17 @@
 """Main file to call from command line and GitHub workflows."""
-import asv
+import argparse
 
 from .simple_formatter import SimpleFormatter
 from .tabulate_formatter import TabulateFormatter
 
+
+def parse_asv_version():
+    parser = argparse.ArgumentParser("lf_asv_formatter")
+    parser.add_argument("--asv_version", help="Version of asv", type=str, required=True)
+    return parser.parse_args().asv_version
+
+
 if __name__ == "__main__":
-    if asv.__version__ >= "0.6.0":
-        SimpleFormatter().rewrite_file()
-    else:
-        TabulateFormatter().rewrite_file()
+    asv_version = parse_asv_version()
+    formatter = SimpleFormatter() if asv_version >= "0.6.0" else TabulateFormatter()
+    formatter.rewrite_file()
