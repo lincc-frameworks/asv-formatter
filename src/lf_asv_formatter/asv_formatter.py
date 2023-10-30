@@ -1,4 +1,6 @@
 class AsvFormatter:
+    """Base class for ASV-specific formatters."""
+
     MAX_NUM_ROWS = 10
     DEFAULT_OUTPUT_FILE = "output"
 

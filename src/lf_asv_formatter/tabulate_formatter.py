@@ -38,9 +38,6 @@ class TabulateFormatter(AsvFormatter):
 
     OUTPUT_TABLE_STYLE = "github"
 
-    def __init__(self, input_file=None, output_file=None):
-        super().__init__(input_file, output_file)
-
     def rewrite_file(self):
         """Reads ASV table and writes new file with transformed GitHub-styled table."""
         rows = self.extract_table_from_file()

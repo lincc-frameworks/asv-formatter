@@ -1,6 +1,8 @@
 from .asv_formatter import AsvFormatter
 
 
+# pylint: disable=line-too-long
+
 class SimpleFormatter(AsvFormatter):
     """The SimpleFormatter is used for asv >= 0.6.0.
 
@@ -28,9 +30,6 @@ class SimpleFormatter(AsvFormatter):
     | +        | 464                  | 3.89k               | 8.38    | benchmarks.MemSuite.mem_list       |
     |          | 3.00±0.5s            | 2.97±1s             | 0.99    | benchmarks.TimeSuite.time_range    |
     """
-
-    def __init__(self, input_file=None, output_file=None):
-        super().__init__(input_file, output_file)
 
     def rewrite_file(self):
         """Reads ASV table and writes new file with transformed table."""

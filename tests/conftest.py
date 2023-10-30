@@ -16,12 +16,12 @@ def test_data_dir():
 
 @pytest.fixture
 def test_data_simple_dir(test_data_dir):
-    return os.path.join(TEST_DIR, DATA_DIR_NAME, "simple")
+    return os.path.join(test_data_dir, "simple")
 
 
 @pytest.fixture
 def test_data_tabulate_dir(test_data_dir):
-    return os.path.join(TEST_DIR, DATA_DIR_NAME, "tabulate")
+    return os.path.join(test_data_dir, "tabulate")
 
 
 @pytest.fixture
