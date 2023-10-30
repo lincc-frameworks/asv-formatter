@@ -15,13 +15,33 @@ def test_data_dir():
 
 
 @pytest.fixture
-def original_output_path():
-    return os.path.join(TEST_DIR, DATA_DIR_NAME, "original_output")
+def test_data_simple_dir(test_data_dir):
+    return os.path.join(TEST_DIR, DATA_DIR_NAME, "simple")
 
 
 @pytest.fixture
-def expected_output_path():
-    return os.path.join(TEST_DIR, DATA_DIR_NAME, "expected_output")
+def test_data_tabulate_dir(test_data_dir):
+    return os.path.join(TEST_DIR, DATA_DIR_NAME, "tabulate")
+
+
+@pytest.fixture
+def original_output_simple_path(test_data_simple_dir):
+    return os.path.join(test_data_simple_dir, "original_output")
+
+
+@pytest.fixture
+def expected_output_simple_path(test_data_simple_dir):
+    return os.path.join(test_data_simple_dir, "expected_output")
+
+
+@pytest.fixture
+def original_output_tabulate_path(test_data_tabulate_dir):
+    return os.path.join(test_data_tabulate_dir, "original_output")
+
+
+@pytest.fixture
+def expected_output_tabulate_path(test_data_tabulate_dir):
+    return os.path.join(test_data_tabulate_dir, "expected_output")
 
 
 @pytest.fixture
@@ -56,7 +76,8 @@ def assert_text_file_matches():
         ), f"files not the same length ({len(contents)} vs {len(golden_contents)})"
         for i, expected in enumerate(golden_contents):
             assert expected == contents[i], (
-                f"files do not match at line {i+1} " f"(actual: [{contents[i]}] vs expected: [{expected}])"
+                f"files do not match at line {i + 1} "
+                f"(actual: [{contents[i]}] vs expected: [{expected}])"
             )
 
         metadata_file.close()

@@ -1,8 +1,11 @@
-"""Main file to call from command line and github workflows."""
+"""Main file to call from command line and GitHub workflows."""
+import asv
 
-
-from .asv_formatter import rewrite_file
+from .simple_formatter import SimpleFormatter
+from .tabulate_formatter import TabulateFormatter
 
 if __name__ == "__main__":
-
-    rewrite_file()
+    if asv.__version__ >= "0.6.0":
+        SimpleFormatter().rewrite_file()
+    else:
+        TabulateFormatter().rewrite_file()
