@@ -1,0 +1,3 @@
+ignore:
+  - "src/lf_asv_formatter/_version.py"
+  - "src/lf_asv_formatter/__main__.py"
