@@ -42,7 +42,7 @@ testpaths = [
     "tests",
 ]
 
-[tool.coverage.report]
+[tool.coverage.run]
 omit = [
     "src/lf_asv_formatter/_version.py",
     "src/lf_asv_formatter/__main__.py",
