@@ -1,0 +1,25 @@
+· Running '/usr/bin/git config init.defaultBranch'
+  OUTPUT -------->
+  main
+· Running '/usr/bin/git rev-parse upstream/main^{commit}'
+  OUTPUT -------->cs
+  a4e3082dc3f9f5b724089189082d33f401061a21
+· Running '/usr/bin/git rev-parse HEAD^{commit}'
+  OUTPUT -------->
+  8110f9f74a714a807867479993593bd9f326e1c5
+· Running '/usr/bin/git name-rev --name-only --exclude=remotes/* --no-undefined a4e3082dc3f9f5b724089189082d33f401061a21'
+  OUTPUT -------->
+  add-docs~15
+· Running '/usr/bin/git name-rev --name-only --exclude=remotes/* --no-undefined 8110f9f74a714a807867479993593bd9f326e1c5'
+  OUTPUT -------->
+  upgrade-asv
+
+All benchmarks:
+
+| Change   | Before [a4e3082d] <add-docs~15>   | After [8110f9f7] <upgrade-asv>   | Ratio   | Benchmark (Parameter)              |
+|----------|-----------------------------------|----------------------------------|---------|------------------------------------|
+|          | 692±600ms                         | 2.72±1s                          | ~3.93   | benchmarks.TimeSuite.time_iterkeys |
+|          | 867±400ms                         | 2.21±1s                          | ~2.55   | benchmarks.TimeSuite.time_range    |
+|          | 1.31±0.2s                         | 2.50±1s                          | ~1.92   | benchmarks.TimeSuite.time_keys     |
+|          | 1.35±0.6s                         | 1.26±0.6s                        | 0.93    | benchmarks.TimeSuite.time_xrange   |
+| -        | 2.92k                             | 1.46k                            | 0.50    | benchmarks.MemSuite.mem_list       |

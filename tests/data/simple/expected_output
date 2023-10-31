@@ -1,0 +1,7 @@
+| Before [bd9dfcb0]    | After [65151fad]    | Ratio   | Benchmark (Parameter)              |
+|----------------------|---------------------|---------|------------------------------------|
+| 2.67±0.3s            | 4.05±0.2s           | ~1.52   | benchmarks.TimeSuite.time_xrange   |
+| 1.97±1s              | 2.51±0.9s           | ~1.27   | benchmarks.TimeSuite.time_keys     |
+| 2.82±1s              | 1.95±0.8s           | ~0.69   | benchmarks.TimeSuite.time_iterkeys |
+| 464                  | 3.89k               | 8.38    | benchmarks.MemSuite.mem_list       |
+| 3.00±0.5s            | 2.97±1s             | 0.99    | benchmarks.TimeSuite.time_range    |

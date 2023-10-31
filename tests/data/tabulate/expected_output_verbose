@@ -1,0 +1,9 @@
+| Before        | After         | Ratio   | Method                             |
+|---------------|---------------|---------|------------------------------------|
+| [a4e3082d]    | [8110f9f7]    |         |                                    |
+| <add-docs~15> | <upgrade-asv> |         |                                    |
+| 692±600ms     | 2.72±1s       | ~3.93   | benchmarks.TimeSuite.time_iterkeys |
+| 867±400ms     | 2.21±1s       | ~2.55   | benchmarks.TimeSuite.time_range    |
+| 1.31±0.2s     | 2.50±1s       | ~1.92   | benchmarks.TimeSuite.time_keys     |
+| 1.35±0.6s     | 1.26±0.6s     | 0.93    | benchmarks.TimeSuite.time_xrange   |
+| 2.92k         | 1.46k         | 0.50    | benchmarks.MemSuite.mem_list       |
