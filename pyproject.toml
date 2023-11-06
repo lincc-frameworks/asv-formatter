@@ -27,6 +27,10 @@ dev = [
     "pylint", # Used for static linting of files
 ]
 
+[metadata]
+long_description = { file = "README.md" }
+url = "https://github.com/lincc-frameworks/lf-asv-formatter"
+
 [build-system]
 requires = [
     "setuptools>=62", # Used to build and package the Python project
