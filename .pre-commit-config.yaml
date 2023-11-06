@@ -1,3 +1,4 @@
+fail_fast: true
 repos:
 
     # Compare the local template version to the latest remote template version
@@ -22,6 +23,70 @@ repos:
         language: system
         entry: jupyter nbconvert --clear-output
 
+    # Prevents committing directly branches named 'main' and 'master'.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: no-commit-to-branch
+        name: Prevent main branch commits
+        description: Prevent the user from committing directly to the primary branch.
+      - id: check-added-large-files
+        name: Check for large files
+        description: Prevent the user from committing very large files.
+        args: ['--maxkb=500']
+
+    # Verify that pyproject.toml is well formed
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.12.1
+    hooks:
+      - id: validate-pyproject
+        name: Validate pyproject.toml
+        description: Verify that pyproject.toml adheres to the established schema.
+
+
+    # Automatically sort the imports used in .py files
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: Run isort
+        description: Sort and organize imports in .py and .pyi files.
+        types_or: [python, pyi]
+
+
+
+    # Analyze the src code style and report code that doesn't adhere.
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint (python files in src/)
+        entry: pylint
+        language: system
+        types: [python]
+        files: ^src/
+        args:
+          [
+            "-rn", # Only display messages
+            "-sn", # Don't display the score
+            "--rcfile=src/.pylintrc",
+          ]
+
+    # Analyze the tests code style and report code that doesn't adhere.
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint (python files in tests/ and benchmarks/)
+        entry: pylint
+        language: system
+        types: [python]
+        files: ^(tests|benchmarks)/
+        args:
+          [
+            "-rn", # Only display messages
+            "-sn", # Don't display the score
+            "--rcfile=tests/.pylintrc",
+          ]
+
     # Run unit tests, verify that they pass. Note that coverage is run against
     # the ./src directory here because that is what will be committed. In the 
     # github workflow script, the coverage is run against the installed package
@@ -36,73 +101,3 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-
-    # prevents committing directly branches named 'main' and 'master'.
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
-    hooks:
-      - id: no-commit-to-branch
-        name: Prevent main branch commits
-        description: Prevent the user from committing directly to the primary branch.
-      - id: check-added-large-files
-        name: Check for large files
-        description: Prevent the user from committing very large files.
-        args: ['--maxkb=500']
-
-    # verify that pyproject.toml is well formed
-  - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.12.1
-    hooks:
-      - id: validate-pyproject
-        name: Validate pyproject.toml
-        description: Verify that pyproject.toml adheres to the established schema.
-
-    # Automatically sort the imports used in .py files
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: isort (python files in src/ and tests/)
-        description: Sort and organize imports in .py files.
-        types: [python]
-        files: ^(src|tests)/
-
-
-    # Analyze the src code style and report code that doesn't adhere.
-  - repo: local
-    hooks:
-      - id: pylint
-        name: pylint (python files in src/)
-        entry: pylint
-        language: system
-        types: [python]
-        files: ^(src|tests)/
-        # It is recommended to specify the latest version of Python
-        # supported by your project here, or alternatively use
-        # pre-commit's default_language_version, see
-        # https://pre-commit.com/#top_level-default_language_version
-        language_version: python3.10
-        files: ^src/
-        args:
-          [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
-            "--rcfile=src/.pylintrc",
-          ]
-    # Analyze the tests code style and report code that doesn't adhere.
-  - repo: local
-    hooks:
-      - id: pylint
-        name: pylint (python files in tests/)
-        entry: pylint
-        language: system
-        types: [python]
-        files: ^tests/
-        args:
-          [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
-            "--rcfile=tests/.pylintrc",
-          ]
-
-
