@@ -63,12 +63,6 @@ repos:
         entry: pylint
         language: system
         types: [python]
-        files: ^(src|tests)/
-        # It is recommended to specify the latest version of Python
-        # supported by your project here, or alternatively use
-        # pre-commit's default_language_version, see
-        # https://pre-commit.com/#top_level-default_language_version
-        language_version: python3.10
         files: ^src/
         args:
           [
@@ -93,4 +87,17 @@ repos:
             "--rcfile=tests/.pylintrc",
           ]
 
-
+    # Run unit tests, verify that they pass. Note that coverage is run against
+    # the ./src directory here because that is what will be committed. In the 
+    # github workflow script, the coverage is run against the installed package
+    # and uploaded to Codecov by calling pytest like so:
+    # `python -m pytest --cov=<package_name> --cov-report=xml`
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: Run unit tests
+        description: Run unit tests with pytest.
+        entry: bash -c "if python -m pytest --co -qq; then python -m pytest --cov=./src --cov-report=html; fi"
+        language: system
+        pass_filenames: false
+        always_run: true
