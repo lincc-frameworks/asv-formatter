@@ -85,7 +85,7 @@ class SimpleFormatter(AsvFormatter):
         content = ""
         if len(tags) == 2:
             # Add message about version comparison
-            content += f"Comparing <{tags[0]}> and <{tags[1]}>\n\n"
+            content += f"Comparing **<{tags[0]}>** and **<{tags[1]}>**\n\n"
         content += f"|{'|'.join(headers)}|\n"
         # +1 to account for the header separator
         max_row = min(self.MAX_NUM_ROWS, len(bench_data)) + 1
@@ -137,7 +137,7 @@ class SimpleFormatter(AsvFormatter):
             match = re.search(tag_pattern, header)
             if match:
                 tag = match.group(1)
-                tags.append(tag)
+                tags.append(re.escape(tag))
                 # Erase tag from the header
                 padding = " " * (len(tag) + 2)
                 new_header = re.sub(tag_pattern, padding, header)
