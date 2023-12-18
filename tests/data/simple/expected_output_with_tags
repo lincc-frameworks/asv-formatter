@@ -1,0 +1,9 @@
+Comparing <0.0.1~59> and <new-branch>
+
+| Before [a4e3082d]              | After [6f9dea7d]                | Ratio   | Benchmark (Parameter)              |
+|--------------------------------|---------------------------------|---------|------------------------------------|
+| 724±600ms                      | 1.83±0.4s                       | ~2.53   | benchmarks.TimeSuite.time_range    |
+| 671±300ms                      | 1.55±0.7s                       | ~2.30   | benchmarks.TimeSuite.time_keys     |
+| 1.25±0.3s                      | 2.35±1s                         | ~1.88   | benchmarks.TimeSuite.time_xrange   |
+| 1.26±0.4s                      | 1.15±0.8s                       | 0.91    | benchmarks.TimeSuite.time_iterkeys |
+| 5.98k                          | 3.1k                            | 0.52    | benchmarks.MemSuite.mem_list       |

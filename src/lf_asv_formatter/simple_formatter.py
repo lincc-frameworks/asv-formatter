@@ -53,16 +53,46 @@ class SimpleFormatter(AsvFormatter):
         str
             The formatted asv table.
         """
-        headers = self.parse_headers(rows[0])
-        bench_data = rows[2:]
-        max_row = min(self.MAX_NUM_ROWS, len(bench_data)) + 2
+        headers = self.process_headers(rows[0])
+        bench_data = rows[1:]
         if len(headers) > 4:
             # If number of columns > 4, there is a "Change"
-            # column that we wish to discard
-            rows = self.remove_first_column(rows)
-        return "".join(map(str, rows[:max_row]))
+            # column that we wish to discard, both in the
+            # headers and in the benchmark data
+            headers = headers[1:]
+            bench_data = self.remove_first_column(bench_data)
+        # Extract tags, if they exist, from the "Before" and "After" header columns
+        headers, tags = self.extract_tags(headers)
+        return self.build_table_content(headers, tags, bench_data)
 
-    def parse_headers(self, headers_str):
+    def build_table_content(self, headers, tags, bench_data):
+        """Builds the table content, in string format.
+
+        Parameters
+        ----------
+        headers : list of str
+            List of table headers.
+        tags : list of str
+            List of branch / version tags. Should be an empty list or a pair.
+        bench_data : list of str
+            List of table rows containing benchmark data.
+
+        Returns
+        -------
+        str
+            The formatted asv table.
+        """
+        content = ""
+        if len(tags) == 2:
+            # Add message about version comparison
+            content += f"Comparing <{tags[0]}> and <{tags[1]}>\n\n"
+        content += f"|{'|'.join(headers)}|\n"
+        # +1 to account for the header separator
+        max_row = min(self.MAX_NUM_ROWS, len(bench_data)) + 1
+        content += "".join(map(str, bench_data[:max_row]))
+        return content
+
+    def process_headers(self, headers_str):
         """Parses table headers using a regular expression.
 
         Parameters
@@ -78,6 +108,44 @@ class SimpleFormatter(AsvFormatter):
         # Regex iterator to find all columns between two "|" chars
         iterator = re.finditer(r"\|(.+?)(?=\|)", headers_str)
         return [match.group(1) for match in iterator]
+
+    def extract_tags(self, headers):
+        """Extracts version tags that are present after a release or the branch
+        names otherwise. They appear in between "<"">" characters.
+
+        The "Before" and "After" columns will contain information about the name of
+        the branches for which the benchmarks were computed. To prevent a scrollable
+        table and simplify it, we extract this information and afterward append it
+        to a message that appears before the table.
+
+        Parameters
+        ----------
+        headers: List[str]
+            The list of table headers.
+
+        Returns
+        -------
+        tuple of str
+            A tuple, where the first element is the list of modified headers
+            ("Before" and "After" columns now have no tags), and the second
+            element the pair of extracted tags, if they exist.
+        """
+        tag_pattern = r"<(.*?)>"
+        new_headers = []
+        tags = []
+        for header in headers[:2]:
+            match = re.search(tag_pattern, header)
+            if match:
+                tag = match.group(1)
+                tags.append(tag)
+                # Erase tag from the header
+                padding = " " * (len(tag) + 2)
+                new_header = re.sub(tag_pattern, padding, header)
+                new_headers.append(new_header)
+            else:
+                new_headers.append(header)
+        new_headers += headers[2:]
+        return new_headers, tags
 
     def remove_first_column(self, lines):
         """Discards the first column of the benchmarks table as it
