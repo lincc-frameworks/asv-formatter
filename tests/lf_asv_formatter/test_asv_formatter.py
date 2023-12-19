@@ -36,7 +36,7 @@ def test_rewrite_file_simple(assert_text_file_matches, tmp_path, test_data_simpl
 
 
 def test_rewrite_file_tabulate(
-    assert_text_file_matches, tmp_path, test_data_tabulate_dir
+        assert_text_file_matches, tmp_path, test_data_tabulate_dir
 ):
     """Confirm that we write out the file with the expected GitHub formatting using tabulate."""
     (
@@ -52,3 +52,12 @@ def test_rewrite_file_tabulate(
     # If the output is verbose
     TabulateFormatter(original_output_verbose, output_file).rewrite_file()
     assert_text_file_matches(output_file, expected_output_verbose)
+
+
+def test_simple_formatter_with_tags(assert_text_file_matches, test_data_simple_dir, tmp_path):
+    """Confirms that we can write out the expected table, extracting the branch / version tags"""
+    original_output_with_tags = os.path.join(test_data_simple_dir, "original_output_with_tags")
+    expected_output_with_tags = os.path.join(test_data_simple_dir, "expected_output_with_tags")
+    output_file = os.path.join(tmp_path, "output_file")
+    SimpleFormatter(original_output_with_tags, output_file).rewrite_file()
+    assert_text_file_matches(output_file, expected_output_with_tags)
