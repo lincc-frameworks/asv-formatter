@@ -55,10 +55,9 @@ def assert_text_file_matches():
             contents
         ), f"files not the same length ({len(contents)} vs {len(golden_contents)})"
         for i, expected in enumerate(golden_contents):
-            assert expected == contents[i], (
-                f"files do not match at line {i + 1} "
-                f"(actual: [{contents[i]}] vs expected: [{expected}])"
-            )
+            assert (
+                expected == contents[i]
+            ), f"files do not match at line {i + 1} (actual: [{contents[i]}] vs expected: [{expected}])"
 
         metadata_file.close()
 

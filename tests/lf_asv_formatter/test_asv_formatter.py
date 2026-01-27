@@ -35,9 +35,7 @@ def test_rewrite_file_simple(assert_text_file_matches, tmp_path, test_data_simpl
     assert_text_file_matches(output_file, expected_output_verbose)
 
 
-def test_rewrite_file_tabulate(
-        assert_text_file_matches, tmp_path, test_data_tabulate_dir
-):
+def test_rewrite_file_tabulate(assert_text_file_matches, tmp_path, test_data_tabulate_dir):
     """Confirm that we write out the file with the expected GitHub formatting using tabulate."""
     (
         original_output,

@@ -1,4 +1,5 @@
 """Main file to call from command line and GitHub workflows."""
+
 import argparse
 
 from .simple_formatter import SimpleFormatter
@@ -9,9 +10,7 @@ def parse_asv_version():
     """Parses asv version from command line arguments."""
     parser = argparse.ArgumentParser("lf_asv_formatter")
     # asv defaults to v0.5.1 for backward compatibility
-    parser.add_argument(
-        "--asv_version", help="Version of asv", type=str, default="0.5.1"
-    )
+    parser.add_argument("--asv_version", help="Version of asv", type=str, default="0.5.1")
     return parser.parse_args().asv_version
 
 
