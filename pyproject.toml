@@ -1,20 +1,22 @@
+
 [project]
 name = "lf-asv-formatter"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 readme = "README.md"
 authors = [
     { name = "LINCC Frameworks Team", email = "Lincc-frameworks-team@lists.lsst.org" }
 ]
+description = "Re-format the output of ASV (air-speed-velocity) for github messages"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
 ]
 dynamic = ["version"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "tabulate", # Used to prettify ASV output tables
 ]
@@ -25,6 +27,7 @@ dependencies = [
 # On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
 [project.optional-dependencies]
 dev = [
+    "black", # Used for static linting of files
     "jupyter", # Clears output from Jupyter notebooks
     "pre-commit", # Used to run checks before finalizing a git commit
     "pylint", # Used for static linting of files
@@ -45,60 +48,17 @@ write_to = "src/lf_asv_formatter/_version.py"
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
+    "src",
+    "docs",
 ]
+addopts = "--doctest-modules --doctest-glob=*.rst"
 
 [tool.black]
 line-length = 110
-target-version = ["py39"]
-
 [tool.isort]
 profile = "black"
 line_length = 110
 
-[tool.ruff]
-line-length = 110
-target-version = "py39"
-
-[tool.ruff.lint]
-select = [
-    # pycodestyle
-    "E",
-    "W",
-    # Pyflakes
-    "F",
-    # pep8-naming
-    "N",
-    # pyupgrade
-    "UP",
-    # flake8-bugbear
-    "B",
-    # flake8-simplify
-    "SIM",
-    # isort
-    "I",
-    # docstrings
-    "D101",
-    "D102",
-    "D103",
-    "D106",
-    "D206",
-    "D207",
-    "D208",
-    "D300",
-    "D417",
-    "D419",
-
-]
-
-ignore = [
-    "UP006", # Allow non standard library generics in type hints
-    "UP007", # Allow Union in type hints
-    "SIM114", # Allow if with same arms
-    "B028", # Allow default warning level
-    "SIM117", # Allow nested with
-    "UP015", # Allow redundant open parameters
-    "UP028", # Allow yield in for loop
-]
 
 [tool.coverage.run]
 omit = [

@@ -1,22 +1,26 @@
 # Changes here will be overwritten by Copier
-_commit: v2.0.1
+_commit: v2.2.0
 _src_path: gh:lincc-frameworks/python-project-template
 author_email: Lincc-frameworks-team@lists.lsst.org
 author_name: LINCC Frameworks Team
 create_example_module: false
-custom_install: true
+custom_install: custom
 enforce_style:
 - pylint
+- black
+- isort
 failure_notification:
 - slack
 include_benchmarks: false
 include_docs: false
 mypy_type_checking: none
 package_name: lf_asv_formatter
+project_description: Re-format the output of ASV (air-speed-velocity) for github messages
 project_license: MIT
 project_name: lf-asv-formatter
 project_organization: lincc-frameworks
 python_versions:
-- '3.9'
 - '3.10'
 - '3.11'
+- '3.12'
+test_lowest_version: none
